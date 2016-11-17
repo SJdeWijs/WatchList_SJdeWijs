@@ -10,8 +10,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="nas.watchlist_sjdewijs.MainActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WatchList"
+            android:textSize="24sp"
+            android:textStyle="normal|bold"
+            android:layout_marginBottom="20dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Movie Title"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ok"/>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saved List"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+
 </RelativeLayout>
