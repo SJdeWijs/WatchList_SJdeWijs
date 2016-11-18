@@ -14,12 +14,21 @@ import java.util.ArrayList;
 
 /**
  * Created by Sander de Wijs on 14-11-2016.
+ * Retrieves information in JSONObject and passes it to MovieData
  */
 
+// create class which extends to an AsyncTask class, with arguments movie title, integer, and result
 public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
-
+    // zoekopdracht, integer, result (hele lijst van info)
     Context context;
     MainActivity activity;
+
+    // constructor waarmee je een instance kan aanmaken. In deze class kunnen we nu ook bij de main activity.
+    public MovieAsyncTask(MainActivity activity) {
+        this.activity = activity;
+        this.context = this.activity.getApplicationContext();
+    }
+
 
 /*    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,31 +55,36 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
     public void onPostExecute(String result){
         super.onPostExecute(result);
 
-        // tag slaat nergens op of verbinding is niet gelukt
-        if (result.length() == 0) {
-            Toast.makeText(context, "No data was found", Toast.LENGTH_LONG);
-        }
-        else {
-            // in TrackData staan titel, omschrijving e.d., zelf aangemaakt.
-            ArrayList<MovieData> trackdata = new ArrayList<>();
-            try {
-                JSONObject respObj = new JSONObject(result);
-                JSONObject topTracksObj = respObj.getJSONObject("tracks");
-                JSONArray tracks = topTracksObj.getJSONArray("track");
+        try {
+            JSONObject resultObj = new JSONObject(result);
+            // JSONObject respObj = new JSONObject(result);
 
-                // iterate through the JSON to extract each object
-                for (int i = 0; i < tracks.length(); i++){
-                    JSONObject track = tracks.getJSONObject(i);
-                    String trackname = track.getString("name");
-                    JSONObject artistObj = track.getJSONObject("artist");
-                    String artistName = artistObj.getString("name");
-                    //trackdata.add(new MovieData(trackname, artistName));
+            String response = resultObj.getString("Response");
+            // movie title was not found or failed to connect
+            if (response.equals("False") == true) {
+                Toast.makeText(context, "No data was found", Toast.LENGTH_LONG);
+            }
+            // iterate through the JSON to extract each object
+            else {
+                JSONArray movies = resultObj.getJSONArray("Search");
+                ArrayList<MovieData> moviedata = new ArrayList<>();
+
+                for (int i = 0; i < movies.length(); i++) {
+
+                    JSONObject movie = movies.getJSONObject(i);
+                    String title = movie.getString("Title");
+                    String year = movie.getString("Year");
+                    String plot = movie.getString("Plot");
+                    String actors = movie.getString("Actors");
+                    String genre = movie.getString("Genre");
+                    String runtime = movie.getString("Runtime");
+                    moviedata.add(new MovieData(title, year, plot, actors, genre, runtime));
                 }
             }
-            catch (JSONException e){
-                e.printStackTrace();
-            }
-            //this.activity.setData(trackdata);
         }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+            //this.activity.setData(trackdata);
     }
 }

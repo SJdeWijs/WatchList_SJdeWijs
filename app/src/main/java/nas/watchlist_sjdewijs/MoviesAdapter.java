@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * Created by Sander de Wijs on 14-11-2016.
+ * Converts the movie information from MovieData in such a way
+ * that it can be shown in a list view.
  */
 
 public class MoviesAdapter extends Activity {
@@ -25,14 +27,12 @@ public class MoviesAdapter extends Activity {
 
         final ListView listview = (ListView) findViewById(R.id.listview);
         String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile" };
+                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"};
 
         final ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < values.length; ++i) {
-            list.add(values[i]);
+        // for (int i = 0; i < values.length; ++i) { list.add(values[i]);} // dit is wat er eerst stond, nu omgezet naar for each
+        for (String value : values) {
+            list.add(value);
         }
         final StableArrayAdapter adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);

@@ -24,13 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (titleEditText.length() != 0) {
             // convert entered words to separate strings
-            String word = titleEditText.getText().toString();
+            String movieTitle = titleEditText.getText().toString();
 
             // create intend to pass entered data to final activity
-            Intent titleActivityIntent = new Intent(this, MovieAsyncTask.class);
-            startActivity(titleActivityIntent);
+            //Intent titleActivityIntent = new Intent(this, MovieAsyncTask.class);
+            //startActivity(titleActivityIntent);
             //finish();
-            }
+
+            MovieAsyncTask asyncTask = new MovieAsyncTask(this);
+            asyncTask.execute(movieTitle);
+
+        }
 
         // show error message when no title is entered
         else {
@@ -40,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         titleEditText.setText("");
     }
 
-
     // switch from current activity to saved watchlist.xml (TracksAdapter activity)
     public void viewWatchList(View view) {
         Intent showViewWatchList = new Intent(this, MoviesAdapter.class);
@@ -48,18 +51,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(showViewWatchList);
         // finish();
     }
-
 }
-/*    Oncreate {tag_input = (EditText)
-            Tracks_listview = (ListView)
-
-            Public void get_data (View view){
-// get user input to complete url
-        String mytag = tag_input.getText().toString();
-
-// make AsyncTask get the data
-        (eerst class implementeren)
-        TagAsyncTask asyncTask = new TagAsyncTask(); // andere naam geven dan tag.
-        asyncTask.execute(myTag);
-
-    }*/
