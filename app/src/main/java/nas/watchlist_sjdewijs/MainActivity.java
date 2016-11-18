@@ -3,10 +3,14 @@ package nas.watchlist_sjdewijs;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static android.R.id.message;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,14 +30,10 @@ public class MainActivity extends AppCompatActivity {
             // convert entered words to separate strings
             String movieTitle = titleEditText.getText().toString();
 
-            // create intend to pass entered data to final activity
-            //Intent titleActivityIntent = new Intent(this, MovieAsyncTask.class);
-            //startActivity(titleActivityIntent);
-            //finish();
-
+            String hoi = "hoi";
+            Log.d("Does it work?", hoi);
             MovieAsyncTask asyncTask = new MovieAsyncTask(this);
             asyncTask.execute(movieTitle);
-
         }
 
         // show error message when no title is entered
@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         // replace entered word with nothing, so textbox is emptied
         titleEditText.setText("");
     }
+
+/*    public void setData{
+
+    }*/
+
 
     // switch from current activity to saved watchlist.xml (TracksAdapter activity)
     public void viewWatchList(View view) {

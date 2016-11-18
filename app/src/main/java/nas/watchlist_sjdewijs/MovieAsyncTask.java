@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -19,36 +20,27 @@ import java.util.ArrayList;
 
 // create class which extends to an AsyncTask class, with arguments movie title, integer, and result
 public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
-    // zoekopdracht, integer, result (hele lijst van info)
     Context context;
     MainActivity activity;
 
-    // constructor waarmee je een instance kan aanmaken. In deze class kunnen we nu ook bij de main activity.
+    // make main activity accesable in this class
     public MovieAsyncTask(MainActivity activity) {
         this.activity = activity;
         this.context = this.activity.getApplicationContext();
     }
-
-
-/*    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }*/
 
     // show toast while processing input and loading data
     public void onPreExecute(){
         Toast.makeText(context, "Retrieving data", Toast.LENGTH_LONG);
     }
 
-    // create array, then send it to onPostExecute()
+    // create an array of strings, then send return value from server to onPostExecute()
     protected String doInBackground(String... params) {
         return HttpRequestHelper.downloadFromServer(params);
     }
 
     public void onProgressUpdate(){
         // als je iets langdurigs doet kan je user update van, je zit nu op 50%.
-
     }
 
     // fills ListView with JSONObject, after recieving result from background
@@ -58,7 +50,6 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
         try {
             JSONObject resultObj = new JSONObject(result);
             // JSONObject respObj = new JSONObject(result);
-
             String response = resultObj.getString("Response");
             // movie title was not found or failed to connect
             if (response.equals("False") == true) {
@@ -66,6 +57,7 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
             }
             // iterate through the JSON to extract each object
             else {
+                // starts looking when "Search" is found in JSON
                 JSONArray movies = resultObj.getJSONArray("Search");
                 ArrayList<MovieData> moviedata = new ArrayList<>();
 
@@ -74,17 +66,19 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
                     JSONObject movie = movies.getJSONObject(i);
                     String title = movie.getString("Title");
                     String year = movie.getString("Year");
-                    String plot = movie.getString("Plot");
-                    String actors = movie.getString("Actors");
-                    String genre = movie.getString("Genre");
-                    String runtime = movie.getString("Runtime");
-                    moviedata.add(new MovieData(title, year, plot, actors, genre, runtime));
+                    String type = movie.getString("Type");
+                    //String actors = movie.getString("Actors");
+                    //String genre = movie.getString("Genre");
+                    //String runtime = movie.getString("Runtime");
+                    moviedata.add(new MovieData(title, year, type));
                 }
+                String message = moviedata.get(0).getYear();
+                Log.d("Year is ", message);
             }
         }
         catch (JSONException e){
             e.printStackTrace();
         }
-            //this.activity.setData(trackdata);
+        //activity.setData(moviedata);
     }
 }

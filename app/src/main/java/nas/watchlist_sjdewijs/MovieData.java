@@ -12,21 +12,53 @@ public class MovieData {
     // create strings for each element of information to return to user
     public String title;
     public String year;
-    public String plot;
-    public String actors;
-    public String genre;
-    public String runtime;
+    public String type;
+    //public String plot;
+    //public String actors;
+    //public String genre;
+    //public String runtime;
 
-    public MovieData (String title, String year, String plot, String actors, String genre, String runtime){
+    public MovieData (String title, String year, String type){
         this.title = title;
         this.year = year;
-        this.plot = plot;
-        this.actors = actors;
-        this.genre = genre;
-        this.runtime = runtime;
+        this.type = type;
+        //this.plot = plot;
+        //this.actors = actors;
+        //this.genre = genre;
+        //this.runtime = runtime;
     }
 
-    public String getActors() {
+    // SET methods
+ /*   public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }*/
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    // GET methods
+/*    public String getActors() {
         return actors;
     }
 
@@ -40,7 +72,7 @@ public class MovieData {
 
     public String getRuntime() {
         return runtime;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -50,8 +82,12 @@ public class MovieData {
         return year;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String[] getAll() {
-        String[] infoarray = new String[] {title, year, plot, actors, genre, runtime};
+        String[] infoarray = new String[] {title, year, type};
         return infoarray;
     }
 }

@@ -14,8 +14,10 @@ import java.util.List;
 
 /**
  * Created by Sander de Wijs on 14-11-2016.
- * Converts the movie information from MovieData in such a way
- * that it can be shown in a list view.
+ * Retrieves the items out of MovieData and then converts the movie information and inserts
+ * it in to a ListView.
+ * This adapter has been copied from http://www.vogella.com/tutorials/AndroidListView/article.html#listview_defaultadapter
+ * "3.3 ListView example with ArrayAdapter"
  */
 
 public class MoviesAdapter extends Activity {
@@ -49,6 +51,7 @@ public class MoviesAdapter extends Activity {
                             @Override
                             public void run() {
                                 list.remove(item);
+                                // verplaats naar watchlist
                                 adapter.notifyDataSetChanged();
                                 view.setAlpha(1);
                             }
@@ -58,7 +61,6 @@ public class MoviesAdapter extends Activity {
     }
 
     private class StableArrayAdapter extends ArrayAdapter<String> {
-
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
         public StableArrayAdapter(Context context, int textViewResourceId,
@@ -68,13 +70,11 @@ public class MoviesAdapter extends Activity {
                 mIdMap.put(objects.get(i), i);
             }
         }
-
         @Override
         public long getItemId(int position) {
             String item = getItem(position);
             return mIdMap.get(item);
         }
-
         @Override
         public boolean hasStableIds() {
             return true;
