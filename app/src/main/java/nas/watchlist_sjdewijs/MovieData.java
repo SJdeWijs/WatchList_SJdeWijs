@@ -74,7 +74,7 @@ public class MovieData {
         return runtime;
     }*/
 
-    public String getTitle() {
+    public String getName() {
         return title;
     }
 

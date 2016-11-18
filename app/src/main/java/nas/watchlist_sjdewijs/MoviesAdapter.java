@@ -30,6 +30,7 @@ public class MoviesAdapter extends Activity {
         final ListView listview = (ListView) findViewById(R.id.listview);
         String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"};
+        //String[] data = MovieData.getName(); can't call non-static method in static state
 
         final ArrayList<String> list = new ArrayList<String>();
         // for (int i = 0; i < values.length; ++i) { list.add(values[i]);} // dit is wat er eerst stond, nu omgezet naar for each

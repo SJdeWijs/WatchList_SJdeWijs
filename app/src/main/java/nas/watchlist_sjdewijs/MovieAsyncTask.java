@@ -51,6 +51,9 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
             JSONObject resultObj = new JSONObject(result);
             // JSONObject respObj = new JSONObject(result);
             String response = resultObj.getString("Response");
+
+            ArrayList<MovieData> moviedata = new ArrayList<>();
+
             // movie title was not found or failed to connect
             if (response.equals("False") == true) {
                 Toast.makeText(context, "No data was found", Toast.LENGTH_LONG);
@@ -59,7 +62,6 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
             else {
                 // starts looking when "Search" is found in JSON
                 JSONArray movies = resultObj.getJSONArray("Search");
-                ArrayList<MovieData> moviedata = new ArrayList<>();
 
                 for (int i = 0; i < movies.length(); i++) {
 
@@ -75,10 +77,10 @@ public class MovieAsyncTask extends AsyncTask<String, Integer, String> {
                 String message = moviedata.get(0).getYear();
                 Log.d("Year is ", message);
             }
+            activity.setData(moviedata);
         }
         catch (JSONException e){
             e.printStackTrace();
         }
-        //activity.setData(moviedata);
     }
 }

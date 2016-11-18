@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import static android.R.id.message;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,10 +46,16 @@ public class MainActivity extends AppCompatActivity {
         titleEditText.setText("");
     }
 
-/*    public void setData{
+    public void setData(final ArrayList<MovieData> moviedata) {
 
-    }*/
+        MoviesAdapter adapter = new MoviesAdapter();
 
+        String test = moviedata.get(0).getYear();
+        Log.d("passeddata: Year is ", test);
+
+
+        //this.moviedata = moviedata;
+    }
 
     // switch from current activity to saved watchlist.xml (TracksAdapter activity)
     public void viewWatchList(View view) {

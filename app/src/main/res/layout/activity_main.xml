@@ -32,7 +32,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:hint="Movie Title"
                 android:id="@+id/title_input" />
@@ -41,8 +41,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ok"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="50dp"
                 android:onClick="enteredTitle"/>
         </LinearLayout>
 
@@ -60,8 +58,11 @@
         android:layout_height="wrap_content"
         android:text="Saved List"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="viewWatchList"/>
+        android:onClick="viewWatchList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
