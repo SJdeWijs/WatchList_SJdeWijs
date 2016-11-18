@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="nas.watchlist_sjdewijs">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -15,6 +16,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".AsyncTask"
+            android:label="Manages threads"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".HttpRequestHelper"
+            android:label="Sends http request"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".SavedWatchList"
+            android:label="Contains adapter used for listview"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
